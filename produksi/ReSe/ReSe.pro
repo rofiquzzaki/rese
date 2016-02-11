@@ -20,3 +20,8 @@ SOURCES += \
 INCLUDEPATH += libssh/include
 LIBS += -L "libssh/lib" -lssh
 DESTDIR = bin
+
+DISTFILES += \
+    libssh/lib/libssh.so \
+    libssh/lib/libssh.so.4 \
+    libssh/lib/libssh.so.4.4.0
