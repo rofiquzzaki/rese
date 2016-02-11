@@ -8,7 +8,8 @@ TEMPLATE = app
 HEADERS += \
     pasuot.h \
     suruh.h \
-    widget.h
+    widget.h \
+    libssh/include/libssh.h
 
 SOURCES += \
     pasuot.cpp \
