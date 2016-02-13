@@ -1,6 +1,5 @@
 #include "suruh.h"
 #include "pasuot.h"
-#include <QDebug>
 #include <QMessageBox>
 #include <QPushButton>
 
@@ -19,10 +18,6 @@ int suruh::ngakon(const char *printah)
 {
     char buffer[256] = {0};
     int nbytes;
-
-    qDebug() << printah;
-    qDebug() << alb << porb << jenb << pasb;
-    qDebug() << &alb << &porb << &jenb << &pasb;
 
     if (sesi_ssh == NULL)
     {
@@ -67,7 +62,6 @@ int suruh::ngakon(const char *printah)
 
     strcpy(otput, buffer);
     //maca inputan, ceritane ngono
-    qDebug() << buffer;
 
     ssh_channel_send_eof(channel);
     ssh_channel_close(channel);
@@ -102,8 +96,6 @@ int suruh::konek_ssh(char *alba, int porba)
 
     rc = ssh_connect(sesi_ssh);
     //konek ke sesi
-    qDebug() << "konek ssh" << alb << porb << jenb << pasb;
-    qDebug() << &alb << &porb << &jenb << &pasb;
 
     return rc;
 }
@@ -124,11 +116,8 @@ int suruh::minta(char *jenba, char *pasba)
 
         rc = 8;
         //8 artinya bisa masuk;
-        //qDebug() << alamat << orang << s_port << pase << sesi_ssh;
     }
 
-    qDebug() << "minta" << alb << porb << jenb << pasb;
-    qDebug() << &alb << &porb << &jenb << &pasb;
     return rc;
 }
 
@@ -143,7 +132,6 @@ int suruh::otentikasi()
         QString pase = mintapas.pase();
         QString prot = mintapas.prot();
         //String dari QLineEdit
-        qDebug() << alamat;
 
         QByteArray alba = alamat.toUtf8();
         QByteArray jenba = jeneng.toUtf8();
@@ -155,27 +143,18 @@ int suruh::otentikasi()
         char *pasb = pasba.data();
         int porb = prot.toInt();
         //QByteArray diubah ke char
-        qDebug() << alb;
 
         QMessageBox pesen;
         QPushButton *tombol = pesen.addButton(("keluar"), QMessageBox::ActionRole);
         //pesan koneksi
 
         rc = konek_ssh(alb, porb);
-        qDebug() << "barkonek" << alb << porb << jenb << pasb;
         if (rc != SSH_OK)
         {
             rc = 7;
         }
         else {
             minta(jenb, pasb);
-            qDebug() << "barminta" << alb << porb << jenb << pasb;
-
-
-            qDebug() << alamat;
-            qDebug() << alb;
-            qDebug() << "otentikasi" << alb << porb << jenb << pasb;
-            qDebug() << "otentikasi" << &alb << &porb << &jenb << &pasb;
 
         }
 
@@ -199,9 +178,6 @@ int suruh::otentikasi()
         {
             exit(0);
         }
-
-        //qDebug() << alb << jenb << pasb << porb;
-        //return 0;
 
     }
     else {

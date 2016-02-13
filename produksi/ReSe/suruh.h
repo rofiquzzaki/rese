@@ -1,7 +1,7 @@
 #ifndef SURUH_H
 #define SURUH_H
 
-#include <libssh/libssh.h>
+#include <libssh.h>
 extern ssh_session sesi_ssh;
 extern char *alb;
 extern int porb;
